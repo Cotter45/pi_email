@@ -57,13 +57,6 @@ const server = http.createServer(async (req, res) => {
           return
         }
   
-        if (!response.ok) {
-          res.statusCode = 500
-          res.setHeader('Content-Type', 'text/plain')
-          res.end('Internal Server Error')
-          return
-        }
-  
         const msg = {
           to: body.to,
           from: 'cotter.github45@gmail.com',
