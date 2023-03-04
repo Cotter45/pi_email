@@ -57,16 +57,12 @@ const server = http.createServer(async (req, res) => {
           return
         }
   
-        const json = await response.json()
-  
-        if (!json.token) {
-          res.statusCode = 401
+        if (!response.ok) {
+          res.statusCode = 500
           res.setHeader('Content-Type', 'text/plain')
-          res.end('Unauthorized')
+          res.end('Internal Server Error')
           return
         }
-  
-        const newToken = json.token
   
         const msg = {
           to: body.to,
@@ -79,7 +75,7 @@ const server = http.createServer(async (req, res) => {
   
         res.statusCode = 201
         res.setHeader('Content-Type', 'application/json')
-        res.end(JSON.stringify({ newToken }))
+        res.end(JSON.stringify({ message: 'Success' }))
         return
       } catch (err) {
         res.statusCode = 500
