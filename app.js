@@ -14,21 +14,21 @@ const server = http.createServer(async (req, res) => {
 
   if (!token) {
     res.statusCode = 401
-    res.setHeader('Content-Type', 'text/plain')
+    res.setHeader('Content-Type', 'application/json')
     res.end('Unauthorized')
     return
   }
 
   if (!req.headers['content-type'] || req.headers['content-type'] !== 'application/json') {
     res.statusCode = 400
-    res.setHeader('Content-Type', 'text/plain')
+    res.setHeader('Content-Type', 'application/json')
     res.end('Bad Request')
     return
   }
 
   if (!req.method || req.method !== 'POST') {
     res.statusCode = 405
-    res.setHeader('Content-Type', 'text/plain')
+    res.setHeader('Content-Type', 'application/json')
     res.end('Method Not Allowed')
     return
   }
@@ -52,7 +52,7 @@ const server = http.createServer(async (req, res) => {
   
         if (response.statusCode >= 400) {
           res.statusCode = 401
-          res.setHeader('Content-Type', 'text/plain')
+          res.setHeader('Content-Type', 'application/json')
           res.end('Unauthorized')
           return
         }
@@ -72,13 +72,13 @@ const server = http.createServer(async (req, res) => {
         return
       } catch (err) {
         res.statusCode = 500
-        res.setHeader('Content-Type', 'text/plain')
+        res.setHeader('Content-Type', 'application/json')
         res.end('Internal Server Error')
         return
       }
     }
     res.statusCode = 404
-    res.setHeader('Content-Type', 'text/plain')
+    res.setHeader('Content-Type', 'application/json')
     res.end('Not Found')
   })
 })
